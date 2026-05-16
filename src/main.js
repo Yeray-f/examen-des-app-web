@@ -1,7 +1,15 @@
+// main.js — YS Books
 import { createApp } from 'vue'
 import App from './App.vue'
+import router from './router/index.js'
+import { inicializarProductos } from './services/productService.js'
 
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+// Cargar productos iniciales desde JSON si no están en localStorage
+fetch('/products.json')
+  .then(r => r.json())
+  .then(data => inicializarProductos(data))
+  .catch(() => {})
 
-createApp(App).mount('#app')
+const app = createApp(App)
+app.use(router)
+app.mount('#app')
