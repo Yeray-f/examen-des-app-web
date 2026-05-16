@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "name": "Roba como un artista",
+    "author": "Austin Kleon",
+    "price": 72000,
+    "category": "Arte",
+    "stock": 15,
+    "image": "https://i.pinimg.com/1200x/c1/60/b7/c160b7b44b5d8a2be7ee355467a08734.jpg",
+    "description": "Las 10 cosas que nadie te ha dicho acerca de ser creativo."
+  },
+  {
+    "id": 2,
+    "name": "El sutil arte de que (casi todo) te importe una mierda",
+    "author": "Mark Manson",
+    "price": 71249,
+    "category": "Psicología",
+    "stock": 20,
+    "image": "https://i.pinimg.com/736x/ec/59/4d/ec594de136b40ebdb87ca05ce4e6eb33.jpg",
+    "description": "Un enfoque refrescante para vivir una buena vida."
+  },
+  {
+    "id": 3,
+    "name": "Asesinato en el Orient Express",
+    "author": "Agatha Christie",
+    "price": 44955,
+    "category": "Misterio",
+    "stock": 10,
+    "image": "https://i.pinimg.com/736x/bd/3a/bc/bd3abcc90208aec1ba49ddba6fb57dc5.jpg",
+    "description": "El famoso detective Hércules Poirot investiga un misterioso asesinato."
+  },
+  {
+    "id": 4,
+    "name": "El alquimista",
+    "author": "Paulo Coelho",
+    "price": 41400,
+    "category": "Novela",
+    "stock": 25,
+    "image": "https://i.pinimg.com/736x/ee/fd/ee/eefdeefe02a77de2b2d10cf6e05d535a.jpg",
+    "description": "La historia de un joven pastor andaluz y su viaje hacia la realización personal."
+  },
+  {
+    "id": 5,
+    "name": "Sapiens: De animales a dioses",
+    "author": "Yuval Noah Harari",
+    "price": 69261,
+    "category": "Historia",
+    "stock": 8,
+    "image": "https://i.pinimg.com/1200x/ff/44/10/ff4410b8b9e9aed2f59669a5f0648565.jpg",
+    "description": "Una breve historia de la humanidad desde los orígenes hasta el presente."
+  },
+  {
+    "id": 6,
+    "name": "Estudio en escarlata",
+    "author": "Arthur Conan Doyle",
+    "price": 52249,
+    "category": "Detective",
+    "stock": 12,
+    "image": "https://i.pinimg.com/736x/bf/5c/82/bf5c823b10d0a4c240b53551ac51accd.jpg",
+    "description": "La primera aparición del legendario Sherlock Holmes."
+  },
+  {
+    "id": 7,
+    "name": "Todo está j*dido",
+    "author": "Mark Manson",
+    "price": 85499,
+    "category": "Psicología",
+    "stock": 18,
+    "image": "https://i.pinimg.com/736x/f5/df/a9/f5dfa98441f5d700e66c664bd58372cf.jpg",
+    "description": "Un libro sobre la esperanza en un mundo aparentemente sin sentido."
+  },
+  {
+    "id": 8,
+    "name": "Homo Deus",
+    "author": "Yuval Noah Harari",
+    "price": 114222,
+    "category": "Historia",
+    "stock": 6,
+    "image": "https://i.pinimg.com/736x/fa/67/3e/fa673e206921da2417bff0fc3569add8.jpg",
+    "description": "Una breve historia del mañana y el futuro de la humanidad."
+  },
+  {
+    "id": 9,
+    "name": "Y no quedó ninguno",
+    "author": "Agatha Christie",
+    "price": 27000,
+    "category": "Misterio",
+    "stock": 14,
+    "image": "https://i.pinimg.com/736x/cf/69/47/cf694752307ad7bd026abd7221caf6cd.jpg",
+    "description": "Diez personas son invitadas a una isla, y una a una van muriendo."
+  },
+  {
+    "id": 10,
+    "name": "El poder de la mente subconsciente",
+    "author": "Joseph Murphy",
+    "price": 38292,
+    "category": "Espiritualidad",
+    "stock": 22,
+    "image": "https://i.pinimg.com/736x/8a/e0/2c/8ae02c0b0283b732117a8ac8236a38c5.jpg",
+    "description": "Cómo utilizar el poder de tu mente subconsciente para cambiar tu vida."
+  },
+  {
+    "id": 11,
+    "name": "Nunca te pares",
+    "author": "Phil Knight",
+    "price": 72000,
+    "category": "Negocios",
+    "stock": 9,
+    "image": "https://i.pinimg.com/736x/54/47/cd/5447cd9f9588fe1bbc9a7bf246c673ae.jpg",
+    "description": "La autobiografía del fundador de Nike. Una historia de perseverancia."
+  },
+  {
+    "id": 12,
+    "name": "Once Minutos",
+    "author": "Paulo Coelho",
+    "price": 72292,
+    "category": "Novela",
+    "stock": 17,
+    "image": "https://i.pinimg.com/1200x/57/2b/3e/572b3e9b6e2493ba0bb4c4251ad6d318.jpg",
+    "description": "Una joven brasileña que viaja a Europa en busca de fama y fortuna."
+  }
+]
