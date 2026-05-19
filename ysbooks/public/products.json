@@ -1,0 +1,482 @@
+[
+  {
+    "id": 1,
+    "name": "Roba como un artista",
+    "author": "Austin Kleon",
+    "price": 72000,
+    "category": "Arte",
+    "stock": 15,
+    "image": "https://i.pinimg.com/1200x/c1/60/b7/c160b7b44b5d8a2be7ee355467a08734.jpg",
+    "description": "Las 10 cosas que nadie te ha dicho acerca de ser creativo."
+  },
+  {
+    "id": 2,
+    "name": "Aprende a promocionar tu trabajo",
+    "author": "Austin Kleon",
+    "price": 78571,
+    "category": "Arte",
+    "stock": 10,
+    "image": "https://i.pinimg.com/736x/6b/79/24/6b79245833fee4fdba37508005650c7b.jpg",
+    "description": "10 recursos para artistas, diseñadores y creativos."
+  },
+  {
+    "id": 3,
+    "name": "Roba a un artista: El diario",
+    "author": "Austin Kleon",
+    "price": 82143,
+    "category": "Arte",
+    "stock": 8,
+    "image": "https://i.pinimg.com/736x/c0/7c/a0/c07ca0e4d1e7513b28349d677317e847.jpg",
+    "description": "El diario creativo del autor de Roba como un artista."
+  },
+  {
+    "id": 4,
+    "name": "Newspaper Blackout",
+    "author": "Austin Kleon",
+    "price": 150148,
+    "category": "Arte",
+    "stock": 5,
+    "image": "https://i.pinimg.com/736x/22/e1/8d/22e18da05e2ce520a09aa8b17ac8c518.jpg",
+    "description": "Poesía creada a partir de páginas de periódico."
+  },
+  {
+    "id": 5,
+    "name": "Sigue avanzando (Keep Going)",
+    "author": "Austin Kleon",
+    "price": 65477,
+    "category": "Arte",
+    "stock": 12,
+    "image": "https://i.pinimg.com/1200x/e1/2d/2b/e12d2bd52e239d721cb61fe537761b12.jpg",
+    "description": "10 formas para mantenerse creativo en buenos y malos momentos."
+  },
+  {
+    "id": 6,
+    "name": "Show Your Work!",
+    "author": "Austin Kleon",
+    "price": 68900,
+    "category": "Arte",
+    "stock": 9,
+    "image": "https://images.cdn2.buscalibre.com/fit-in/360x360/7c/a6/7ca6693c2b96d014896cb8bca559332a.jpg",
+    "description": "Comparte tu proceso creativo y conecta con tu audiencia."
+  },
+  {
+    "id": 7,
+    "name": "El sutil arte de que (casi todo) te importe una mierda",
+    "author": "Mark Manson",
+    "price": 71249,
+    "category": "Psicología",
+    "stock": 20,
+    "image": "https://i.pinimg.com/736x/ec/59/4d/ec594de136b40ebdb87ca05ce4e6eb33.jpg",
+    "description": "Un enfoque refrescante para vivir una buena vida."
+  },
+  {
+    "id": 8,
+    "name": "Todo está j*dido",
+    "author": "Mark Manson",
+    "price": 85499,
+    "category": "Psicología",
+    "stock": 18,
+    "image": "https://i.pinimg.com/736x/f5/df/a9/f5dfa98441f5d700e66c664bd58372cf.jpg",
+    "description": "Un libro sobre la esperanza en un mundo aparentemente sin sentido."
+  },
+  {
+    "id": 9,
+    "name": "El Amor No Es Suficiente",
+    "author": "Mark Manson",
+    "price": 60638,
+    "category": "Psicología",
+    "stock": 14,
+    "image": "https://i.pinimg.com/736x/d1/66/a3/d166a32eff44f4bd1a21aff3ca8db63c.jpg",
+    "description": "Una guía honesta sobre las relaciones amorosas en el mundo moderno."
+  },
+  {
+    "id": 10,
+    "name": "Will",
+    "author": "Mark Manson",
+    "price": 49610,
+    "category": "Psicología",
+    "stock": 9,
+    "image": "https://i.pinimg.com/736x/0d/46/2e/0d462e5899f7122e86104e80b3fb419b.jpg",
+    "description": "Una exploración profunda sobre la fuerza de voluntad y la motivación humana."
+  },
+  {
+    "id": 11,
+    "name": "Models: Attract Women Through Honesty",
+    "author": "Mark Manson",
+    "price": 71490,
+    "category": "Psicología",
+    "stock": 7,
+    "image": "https://i.pinimg.com/736x/77/4f/47/774f47497b0b35f20065326cac457df3.jpg",
+    "description": "Guía de autodesarrollo personal con enfoque en autenticidad y confianza."
+  },
+  {
+    "id": 12,
+    "name": "Dimensiones: El nuevo libro de Mark Manson",
+    "author": "Mark Manson",
+    "price": 55000,
+    "category": "Psicología",
+    "stock": 11,
+    "image": "https://images.cdn1.buscalibre.com/fit-in/360x360/4e/01/4e01f6468101fdb55bdb771af2fea55d.jpg",
+    "description": "Reflexiones sobre la identidad, el propósito y cómo vivir bien en el mundo moderno."
+  },
+  {
+    "id": 13,
+    "name": "Asesinato en el Orient Express",
+    "author": "Agatha Christie",
+    "price": 44955,
+    "category": "Misterio",
+    "stock": 10,
+    "image": "https://i.pinimg.com/736x/bd/3a/bc/bd3abcc90208aec1ba49ddba6fb57dc5.jpg",
+    "description": "El famoso detective Hércules Poirot investiga un misterioso asesinato."
+  },
+  {
+    "id": 14,
+    "name": "La casa torcida",
+    "author": "Agatha Christie",
+    "price": 83986,
+    "category": "Misterio",
+    "stock": 8,
+    "image": "https://i.pinimg.com/736x/da/df/72/dadf7273c8aab7a2df10c91b8d95a690.jpg",
+    "description": "Una familia con oscuros secretos y un crimen que sacude sus cimientos."
+  },
+  {
+    "id": 15,
+    "name": "Muerte en el Nilo",
+    "author": "Agatha Christie",
+    "price": 43724,
+    "category": "Misterio",
+    "stock": 11,
+    "image": "https://i.pinimg.com/736x/6f/01/72/6f017252aeba67683f2e3688ca305428.jpg",
+    "description": "Poirot investiga el asesinato de una joven millonaria en un crucero por el Nilo."
+  },
+  {
+    "id": 16,
+    "name": "El asesinato de Roger Ackroyd",
+    "author": "Agatha Christie",
+    "price": 54723,
+    "category": "Misterio",
+    "stock": 9,
+    "image": "https://i.pinimg.com/736x/e3/f8/73/e3f8736044ee8c995354ca6f093f821b.jpg",
+    "description": "Una de las novelas policiales más sorprendentes de todos los tiempos."
+  },
+  {
+    "id": 17,
+    "name": "Y no quedó ninguno",
+    "author": "Agatha Christie",
+    "price": 27000,
+    "category": "Misterio",
+    "stock": 14,
+    "image": "https://i.pinimg.com/736x/cf/69/47/cf694752307ad7bd026abd7221caf6cd.jpg",
+    "description": "Diez personas son invitadas a una isla, y una a una van muriendo."
+  },
+  {
+    "id": 18,
+    "name": "El misterioso caso de Styles",
+    "author": "Agatha Christie",
+    "price": 39500,
+    "category": "Misterio",
+    "stock": 7,
+    "image": "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1652812002i/61116989.jpg",
+    "description": "La primera novela de Agatha Christie, con la primera aparición de Poirot."
+  },
+  {
+    "id": 19,
+    "name": "El poder de la mente subconsciente",
+    "author": "Joseph Murphy",
+    "price": 38292,
+    "category": "Espiritualidad",
+    "stock": 22,
+    "image": "https://i.pinimg.com/736x/8a/e0/2c/8ae02c0b0283b732117a8ac8236a38c5.jpg",
+    "description": "Cómo utilizar el poder de tu mente subconsciente para cambiar tu vida."
+  },
+  {
+    "id": 20,
+    "name": "La magia de la fe",
+    "author": "Joseph Murphy",
+    "price": 187792,
+    "category": "Espiritualidad",
+    "stock": 6,
+    "image": "https://i.pinimg.com/1200x/52/c3/61/52c36157950d5775e4425c1212c2a4e3.jpg",
+    "description": "Descubre cómo la fe puede transformar tu vida y alcanzar tus sueños."
+  },
+  {
+    "id": 21,
+    "name": "How to Use Your Healing Power",
+    "author": "Joseph Murphy",
+    "price": 120708,
+    "category": "Espiritualidad",
+    "stock": 4,
+    "image": "https://i.pinimg.com/736x/aa/37/2b/aa372b0c2b6dfc324f5f50ac4f309179.jpg",
+    "description": "Técnicas para aprovechar el poder curativo de la mente subconsciente."
+  },
+  {
+    "id": 22,
+    "name": "How to Attract Money",
+    "author": "Joseph Murphy",
+    "price": 66181,
+    "category": "Espiritualidad",
+    "stock": 13,
+    "image": "https://i.pinimg.com/736x/e8/ba/e0/e8bae0461fb59630cf48cf7a7fbd5c0e.jpg",
+    "description": "Principios mentales y espirituales para atraer la abundancia y prosperidad."
+  },
+  {
+    "id": 23,
+    "name": "Telepsychics",
+    "author": "Joseph Murphy",
+    "price": 78920,
+    "category": "Espiritualidad",
+    "stock": 5,
+    "image": "https://i.pinimg.com/736x/fd/8a/2a/fd8a2acb1673c68d7594efd1b6f6209a.jpg",
+    "description": "Explora el poder de la mente para conectar con fuerzas superiores."
+  },
+  {
+    "id": 24,
+    "name": "The Power of Your Subconscious Mind (Edición Clásica)",
+    "author": "Joseph Murphy",
+    "price": 54300,
+    "category": "Espiritualidad",
+    "stock": 8,
+    "image": "https://images.cdn1.buscalibre.com/fit-in/360x360/8c/35/8c35370f94bce5a8f9835c984becd434.jpg",
+    "description": "Edición clásica revisada del bestseller de Joseph Murphy sobre la mente subconsciente."
+  },
+  {
+    "id": 25,
+    "name": "El alquimista",
+    "author": "Paulo Coelho",
+    "price": 41400,
+    "category": "Novela",
+    "stock": 25,
+    "image": "https://i.pinimg.com/736x/ee/fd/ee/eefdeefe02a77de2b2d10cf6e05d535a.jpg",
+    "description": "La historia de un joven pastor andaluz y su viaje hacia la realización personal."
+  },
+  {
+    "id": 26,
+    "name": "Once Minutos",
+    "author": "Paulo Coelho",
+    "price": 72292,
+    "category": "Novela",
+    "stock": 17,
+    "image": "https://i.pinimg.com/1200x/57/2b/3e/572b3e9b6e2493ba0bb4c4251ad6d318.jpg",
+    "description": "Una joven brasileña que viaja a Europa en busca de fama y fortuna."
+  },
+  {
+    "id": 27,
+    "name": "El Peregrino de Compostela",
+    "author": "Paulo Coelho",
+    "price": 47487,
+    "category": "Novela",
+    "stock": 10,
+    "image": "http://i.pinimg.com/736x/ff/a4/83/ffa483a598ec37cfb011728eb278c9e2.jpg",
+    "description": "El relato del Camino de Santiago que marcó la vida del autor."
+  },
+  {
+    "id": 28,
+    "name": "Adulterio",
+    "author": "Paulo Coelho",
+    "price": 31850,
+    "category": "Novela",
+    "stock": 12,
+    "image": "https://i.pinimg.com/736x/29/fc/60/29fc60f05b7907232861ca3b82f920b3.jpg",
+    "description": "Una novela sobre el amor, la culpa y la búsqueda de sentido en la vida."
+  },
+  {
+    "id": 29,
+    "name": "Maktub",
+    "author": "Paulo Coelho",
+    "price": 36099,
+    "category": "Novela",
+    "stock": 15,
+    "image": "https://i.pinimg.com/736x/e7/9a/96/e79a969443ea880d514ad0f0c6e85651.jpg",
+    "description": "Una colección de historias inspiradoras y parábolas llenas de sabiduría."
+  },
+  {
+    "id": 30,
+    "name": "Brida",
+    "author": "Paulo Coelho",
+    "price": 42500,
+    "category": "Novela",
+    "stock": 9,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTq31SKyUM0SSCqHTkMD1V4KooC1V7Jk9HFng&s",
+    "description": "La historia de una joven irlandesa en busca de su don especial y el verdadero amor."
+  },
+  {
+    "id": 31,
+    "name": "Sapiens: De animales a dioses",
+    "author": "Yuval Noah Harari",
+    "price": 69261,
+    "category": "Historia",
+    "stock": 8,
+    "image": "https://i.pinimg.com/1200x/ff/44/10/ff4410b8b9e9aed2f59669a5f0648565.jpg",
+    "description": "Una breve historia de la humanidad desde los orígenes hasta el presente."
+  },
+  {
+    "id": 32,
+    "name": "Homo Deus",
+    "author": "Yuval Noah Harari",
+    "price": 114222,
+    "category": "Historia",
+    "stock": 6,
+    "image": "https://i.pinimg.com/736x/fa/67/3e/fa673e206921da2417bff0fc3569add8.jpg",
+    "description": "Una breve historia del mañana y el futuro de la humanidad."
+  },
+  {
+    "id": 33,
+    "name": "Nexus",
+    "author": "Yuval Noah Harari",
+    "price": 107259,
+    "category": "Historia",
+    "stock": 9,
+    "image": "https://i.pinimg.com/1200x/95/82/61/958261d1e5a63f603f90aecf6bad27fd.jpg",
+    "description": "Cómo las redes de información han moldeado la historia humana."
+  },
+  {
+    "id": 34,
+    "name": "21 lecciones para el siglo XXI",
+    "author": "Yuval Noah Harari",
+    "price": 107571,
+    "category": "Historia",
+    "stock": 7,
+    "image": "https://i.pinimg.com/1200x/ef/05/1f/ef051f734ae35776b7fce4c393d33660.jpg",
+    "description": "Reflexiones sobre los desafíos más urgentes del mundo actual."
+  },
+  {
+    "id": 35,
+    "name": "De animales a dioses (edición ilustrada)",
+    "author": "Yuval Noah Harari",
+    "price": 135000,
+    "category": "Historia",
+    "stock": 4,
+    "image": "https://images.cdn2.buscalibre.com/fit-in/360x360/b5/1a/b51a9baa4e59e89a3578cb224e1f1d81.jpg",
+    "description": "Edición especial ilustrada de Sapiens con imágenes y mapas exclusivos."
+  },
+  {
+    "id": 36,
+    "name": "Unstoppable Us",
+    "author": "Yuval Noah Harari",
+    "price": 89000,
+    "category": "Historia",
+    "stock": 11,
+    "image": "https://images.cdn3.buscalibre.com/fit-in/360x360/8e/2a/8e2a4555b7a1abcee80563d9236717b3.jpg",
+    "description": "Versión joven de Sapiens, adaptada para nuevas generaciones con ilustraciones."
+  },
+  {
+    "id": 37,
+    "name": "Estudio en escarlata",
+    "author": "Arthur Conan Doyle",
+    "price": 52249,
+    "category": "Detective",
+    "stock": 12,
+    "image": "https://i.pinimg.com/736x/bf/5c/82/bf5c823b10d0a4c240b53551ac51accd.jpg",
+    "description": "La primera aparición del legendario Sherlock Holmes."
+  },
+  {
+    "id": 38,
+    "name": "El sabueso de los Baskerville",
+    "author": "Arthur Conan Doyle",
+    "price": 92245,
+    "category": "Detective",
+    "stock": 10,
+    "image": "http://i.pinimg.com/736x/d8/68/56/d868569dc5d0e7a269953943a5a3de3e.jpg",
+    "description": "Sherlock Holmes investiga la maldición que persigue a la familia Baskerville."
+  },
+  {
+    "id": 39,
+    "name": "El signo de los cuatro",
+    "author": "Arthur Conan Doyle",
+    "price": 79915,
+    "category": "Detective",
+    "stock": 8,
+    "image": "https://i.pinimg.com/736x/e1/4c/3b/e14c3b9ccf4a6f5a83d3fbb53be4de6c.jpg",
+    "description": "Holmes y Watson resuelven el misterio de un tesoro y una venganza antigua."
+  },
+  {
+    "id": 40,
+    "name": "El valle del terror",
+    "author": "Arthur Conan Doyle",
+    "price": 58000,
+    "category": "Detective",
+    "stock": 9,
+    "image": "https://libreriasiglo.com/222914/el-valle-del-terror.jpg",
+    "description": "Holmes descifra un código secreto para prevenir un asesinato en una mansión."
+  },
+  {
+    "id": 41,
+    "name": "Las aventuras de Sherlock Holmes",
+    "author": "Arthur Conan Doyle",
+    "price": 64500,
+    "category": "Detective",
+    "stock": 14,
+    "image": "https://images.cdn1.buscalibre.com/fit-in/360x360/07/c8/07c8ab4dfef3c9dcd62c9685707492b3.jpg",
+    "description": "Doce relatos cortos protagonizados por el famoso detective de Baker Street."
+  },
+  {
+    "id": 42,
+    "name": "El regreso de Sherlock Holmes",
+    "author": "Arthur Conan Doyle",
+    "price": 71000,
+    "category": "Detective",
+    "stock": 6,
+    "image": "https://cdn.prod.website-files.com/6034d7d1f3e0f52c50b2adee/696609e05f7bdd507f939939_UO9PVEjxO3Wg19WwhKVAnTW_Ppo0aYoUE18PrQFDJdU.jpeg",
+    "description": "Holmes regresa de entre los muertos para resolver nuevos misterios."
+  },
+  {
+    "id": 43,
+    "name": "Nunca te pares (Shoe Dog)",
+    "author": "Phil Knight",
+    "price": 72000,
+    "category": "Negocios",
+    "stock": 9,
+    "image": "https://i.pinimg.com/736x/54/47/cd/5447cd9f9588fe1bbc9a7bf246c673ae.jpg",
+    "description": "La autobiografía del fundador de Nike. Una historia de perseverancia."
+  },
+  {
+    "id": 44,
+    "name": "Shoe Dog: Edición de bolsillo",
+    "author": "Phil Knight",
+    "price": 67472,
+    "category": "Negocios",
+    "stock": 7,
+    "image": "https://images.cdn2.buscalibre.com/fit-in/360x360/b8/7c/b87c096545453f87dd952e54d3f447e1.jpg",
+    "description": "Memorias del creador de Nike sobre la construcción de una marca icónica."
+  },
+  {
+    "id": 45,
+    "name": "Shoe Dog: Edición francesa",
+    "author": "Phil Knight",
+    "price": 54377,
+    "category": "Negocios",
+    "stock": 4,
+    "image": "https://images.cdn2.buscalibre.com/fit-in/360x360/1c/62/1c623e1e79ecea0ba730594ff06c13d8.jpg",
+    "description": "Autobiografía del fundador de Nike en edición francesa."
+  },
+  {
+    "id": 46,
+    "name": "Shoe Dog: Edición Jóvenes Lectores",
+    "author": "Phil Knight",
+    "price": 48000,
+    "category": "Negocios",
+    "stock": 11,
+    "image": "https://images.cdn1.buscalibre.com/fit-in/360x360/1e/b7/1eb75de3f454a828ad63f9e9e3d09848.jpg",
+    "description": "Versión adaptada para jóvenes de las memorias del fundador de Nike."
+  },
+  {
+    "id": 47,
+    "name": "Liderazgo al estilo Nike",
+    "author": "Phil Knight",
+    "price": 59000,
+    "category": "Negocios",
+    "stock": 8,
+    "image": "https://images.cdn2.buscalibre.com/fit-in/360x360/bf/24/bf24bcba993e45c30b14000fb8084aea.jpg",
+    "description": "Las lecciones de gestión y liderazgo que hicieron grande a Nike."
+  },
+  {
+    "id": 48,
+    "name": "Just Do It: La filosofía Nike",
+    "author": "Phil Knight",
+    "price": 63000,
+    "category": "Negocios",
+    "stock": 6,
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQICzH1gc3RVLJG2867mjjbNrjJyW8_abJFyQ&s",
+    "description": "La historia detrás del eslogan más famoso del mundo del deporte."
+  }
+]
