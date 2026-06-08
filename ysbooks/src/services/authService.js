@@ -1,50 +1,157 @@
-// services/authService.js — YS Books
-// Servicio de autenticación: valida usuarios desde usuarios.json
-// NOTA EDUCATIVA: Esta validación es solo con fines académicos.
-// En una aplicación real se usaría un backend con contraseñas encriptadas y tokens.
+import usuariosLocales from '../../public/usuarios.json'
+import { getCollection, hasMockApi, updateItem } from './apiClient.js'
+import { normalizeRole, roleLabel, ROLES } from '../utils/roles.js'
+import { createPasswordRecord, isLegacyPasswordRecord, verifyPassword } from '../utils/passwordHash.js'
+import { useAuthStore } from '../stores/authStore.js'
 
-/**
- * Carga los usuarios desde el archivo JSON local.
- * @returns {Promise<Array>} Lista de usuarios
- */
-export async function cargarUsuarios() {
-  const response = await fetch('/usuarios.json')
-  const usuarios = await response.json()
-  return usuarios
+const RESOURCE_PATH = import.meta.env.VITE_MOCKAPI_USERS_PATH || 'usuarios'
+
+function createToken(usuario) {
+  const base = `${usuario.usuario || 'user'}-${Date.now()}`
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return `${base}-${crypto.randomUUID()}`
+  }
+
+  return `${base}-${Math.random().toString(36).slice(2, 10)}`
 }
 
-/**
- * Valida las credenciales contra la lista de usuarios.
- * @param {string} usuario
- * @param {string} password
- * @param {Array} usuarios - Lista cargada desde JSON
- * @returns {Object|null} El usuario encontrado o null si no existe
- */
-export function validarCredenciales(usuario, password, usuarios) {
-  return usuarios.find(u => u.usuario === usuario && u.password === password) || null
+function persistSession(session) {
+  if (typeof window === 'undefined') return
+  const { setSession } = useAuthStore()
+  setSession(session)
 }
 
-/**
- * Guarda la sesión del usuario en sessionStorage.
- * @param {Object} usuario
- */
+export async function cargarUsuariosAuth() {
+  if (!hasMockApi()) {
+    return usuariosLocales
+  }
+
+  return getCollection(RESOURCE_PATH).catch(()=>usuariosLocales)
+}
+
+export async function validarCredenciales(usuario, password) {
+  const listado = await cargarUsuariosAuth()
+  const username = String(usuario || '').trim().toLowerCase()
+  const candidate = Array.isArray(listado)
+    ? listado.find(item => String(item.usuario || '').trim().toLowerCase() === username && item.activo !== false)
+    : null
+
+  if (!candidate) return null
+
+  if (await verifyPassword(password, candidate)) {
+    return candidate
+  }
+
+  if (isLegacyPasswordRecord(candidate) && String(candidate.password) === String(password)) {
+    try {
+      const secure = await createPasswordRecord(password)
+      await updateItem(RESOURCE_PATH, candidate.id, {
+        ...candidate,
+        ...secure,
+        password: undefined
+      })
+    } catch {
+      // La migración es opcional; no bloquea el acceso si la API no permite actualizar.
+    }
+
+    return candidate
+  }
+
+  return null
+}
+
+export async function iniciarSesion(usuario, password) {
+  if (!hasMockApi()) {
+    throw new Error('Servicio no disponible')
+  }
+
+  const identidad = String(usuario || '').trim()
+  const clave = String(password || '')
+
+  if (!identidad || !clave) {
+    throw new Error('Completa usuario y contraseña.')
+  }
+
+  let encontrado = null
+
+  try {
+    encontrado = await validarCredenciales(identidad, clave)
+  } catch (error) {
+    throw new Error('Servicio no disponible')
+  }
+
+  if (!encontrado) {
+    throw new Error('Usuario o contraseña incorrectos.')
+  }
+
+  const sesion = {
+    token: createToken(encontrado),
+    user: {
+      id: encontrado.id,
+      nombre: encontrado.nombre,
+      usuario: encontrado.usuario,
+      role: normalizeRole(encontrado.role),
+      email: encontrado.email || ''
+    },
+    createdAt: new Date().toISOString()
+  }
+
+  persistSession(sesion)
+  return sesion
+}
+
 export function guardarSesion(usuario) {
-  sessionStorage.setItem('ysbooks_auth', 'true')
-  sessionStorage.setItem('ysbooks_usuario', usuario.nombre)
+  const sesion = {
+    token: createToken(usuario),
+    user: {
+      id: usuario.id,
+      nombre: usuario.nombre,
+      usuario: usuario.usuario,
+      role: normalizeRole(usuario.role),
+      email: usuario.email || ''
+    },
+    createdAt: new Date().toISOString()
+  }
+  persistSession(sesion)
+  return sesion
 }
 
-/**
- * Cierra la sesión eliminando los datos de sessionStorage.
- */
 export function cerrarSesion() {
-  sessionStorage.removeItem('ysbooks_auth')
-  sessionStorage.removeItem('ysbooks_usuario')
+  const { clearSession } = useAuthStore()
+  clearSession()
 }
 
-/**
- * Retorna el nombre del usuario en sesión.
- * @returns {string}
- */
+export function obtenerSesion() {
+  if (typeof window === 'undefined') return null
+  const { syncFromStorage } = useAuthStore()
+  const sesion = syncFromStorage()
+  if (sesion?.user) {
+    sesion.user.role = normalizeRole(sesion.user.role)
+    return sesion
+  }
+  return null
+}
+
+export function isAuthenticated() {
+  return Boolean(obtenerSesion())
+}
+
+export function obtenerUsuarioActual() {
+  return obtenerSesion()?.user || null
+}
+
 export function obtenerNombreUsuario() {
-  return sessionStorage.getItem('ysbooks_usuario') || 'Usuario'
+  return obtenerUsuarioActual()?.nombre || 'Usuario'
+}
+
+export function obtenerRolActual() {
+  return normalizeRole(obtenerUsuarioActual()?.role)
+}
+
+export function esAdministrador() {
+  return obtenerRolActual() === ROLES.ADMIN
+}
+
+export function obtenerEtiquetaRol() {
+  return roleLabel(obtenerRolActual())
 }
