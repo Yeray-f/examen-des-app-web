@@ -18,10 +18,15 @@
 
     <!-- Navegación horizontal -->
     <nav class="header-nav d-none d-md-flex">
-      <router-link to="/dashboard" exact class="hn-link" active-class="hn-link--active">Inicio</router-link>
+      <router-link v-if="esAdmin" to="/dashboard/inicio" class="hn-link" active-class="hn-link--active">Inicio</router-link>
       <router-link to="/dashboard/catalogo" class="hn-link" active-class="hn-link--active">Catálogo</router-link>
       <router-link to="/dashboard/ofertas" class="hn-link" active-class="hn-link--active">Ofertas</router-link>
-      <router-link to="/dashboard/clientes" class="hn-link" active-class="hn-link--active">Contacto</router-link>
+      <router-link to="/dashboard/pedidos" class="hn-link" active-class="hn-link--active">Pedidos</router-link>
+      <router-link v-if="esAdmin" to="/dashboard/usuarios" class="hn-link" active-class="hn-link--active">Usuarios</router-link>
+      <router-link v-if="esAdmin" to="/dashboard/productos" class="hn-link" active-class="hn-link--active">Productos</router-link>
+      <router-link v-if="esAdmin" to="/dashboard/clientes" class="hn-link" active-class="hn-link--active">Clientes</router-link>
+      <router-link v-if="esAdmin" to="/dashboard/autores" class="hn-link" active-class="hn-link--active">Autores</router-link>
+      <router-link to="/dashboard/perfil" class="hn-link" active-class="hn-link--active">Perfil</router-link>
     </nav>
 
     <!-- Buscador -->
@@ -85,7 +90,7 @@
       <div class="user-profile">
         <div class="user-info d-none d-md-flex">
           <span class="user-name">{{ nombreUsuario }}</span>
-          <span class="user-role">Miembro</span>
+          <span class="user-role">{{ roleLabel }}</span>
         </div>
         <div class="user-avatar">{{ iniciales }}</div>
       </div>
@@ -98,9 +103,14 @@
 </template>
 
 <script>
+import { roleLabel, normalizeRole, ROLES } from '../utils/roles.js'
+
 export default {
   name: 'NavbarComponent',
-  props: { nombreUsuario: { type: String, default: 'Administrador YS Books' } },
+  props: {
+    nombreUsuario: { type: String, default: 'Administrador YS Books' },
+    role: { type: String, default: ROLES.CLIENTE }
+  },
   emits: ['logout'],
   data() {
     return {
@@ -121,7 +131,9 @@ export default {
   computed: {
     iniciales() { return this.nombreUsuario?.slice(0, 1).toUpperCase() || 'A' },
     notifCount() { return this.notificaciones.filter(n => !n.leida).length },
-    mailCount() { return this.mensajes.filter(m => !m.leido).length }
+    mailCount() { return this.mensajes.filter(m => !m.leido).length },
+    esAdmin() { return normalizeRole(this.role) === ROLES.ADMIN },
+    roleLabel() { return roleLabel(this.role) }
   },
   mounted() {
     document.addEventListener('click', this.cerrarPaneles)
