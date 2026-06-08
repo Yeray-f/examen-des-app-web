@@ -34,10 +34,7 @@
           <transition-group name="item-list" tag="div">
             <div v-for="item in cart.items" :key="item.id" class="cart-item">
               <div class="item-cover">
-                <img v-if="item.image" :src="item.image" :alt="item.name" @error="e => e.target.style.display='none'" />
-                <div class="item-cover-fb" :style="{ background: colorOf(item.id) }">
-                  <i class="bi bi-book-fill text-white"></i>
-                </div>
+                <img :src="$resolveCover(item.image, { title: item.name, id: item.id })" :alt="item.name" @error="e => { e.target.onerror = null; e.target.src = $resolveCover(null, { title: item.name, id: item.id }) }" />
               </div>
               <div class="item-details">
                 <p class="item-name">{{ item.name }}</p>
@@ -107,7 +104,7 @@
         </div>
 
         <!-- Modal confirmación vaciar -->
-        <div v-if="showConfirmVaciar" class="confirm-overlay" @click.self="showConfirmVaciar = false">
+        <div v-if="showConfirmVaciar" class="modal fade show d-block" tabindex="-1" role="dialog" aria-modal="true" @click.self="showConfirmVaciar = false">
           <div class="confirm-modal">
             <i class="bi bi-exclamation-circle confirm-icon"></i>
             <h4>¿Vaciar carrito?</h4>
@@ -131,6 +128,8 @@
 
 <script>
 import { cartStore } from '../services/cartService.js'
+import { crearPedido } from '../services/orderService.js'
+import { obtenerUsuarioActual } from '../services/authService.js'
 
 const PALETA = ['#1e2d47','#2a1a5e','#0f2a50','#1e3a3a','#3a1a1a','#1a3a1a']
 
@@ -162,14 +161,24 @@ export default {
       this.showConfirmVaciar = false
     },
     realizarPedido() {
-      const total = this.formatPrecio(this.cart.total)
-      const items = this.cart.totalItems
-      this.cart.vaciar()
-      this.toastMsg = `¡Pedido realizado! ${items} libro${items > 1 ? 's' : ''} — $${total}`
-      setTimeout(() => {
-        this.toastMsg = ''
-        this.cart.cerrarCarrito()
-      }, 3000)
+      try {
+        const pedido = crearPedido({
+          user: obtenerUsuarioActual(),
+          items: this.cart.items,
+          metodoPago: 'Tarjeta'
+        })
+        const total = this.formatPrecio(pedido.total)
+        const items = pedido.items.reduce((sum, item) => sum + Number(item.cantidad || 0), 0)
+        this.cart.vaciar()
+        this.toastMsg = `Pedido #${pedido.id} enviado para validación. ${items} libro${items > 1 ? 's' : ''} — $${total}`
+        setTimeout(() => {
+          this.toastMsg = ''
+          this.cart.cerrarCarrito()
+        }, 3200)
+      } catch (error) {
+        this.toastMsg = error.message || 'No se pudo generar el pedido.'
+        setTimeout(() => { this.toastMsg = '' }, 3000)
+      }
     }
   }
 }
@@ -591,18 +600,6 @@ export default {
 .btn-vaciar:hover { border-color: rgba(239,68,68,.4); color: #f87171; }
 
 /* ─── Confirm modal ─── */
-.confirm-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,.6);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-  padding: 20px;
-}
-
 .confirm-modal {
   background: var(--bg-elevated);
   border: 1px solid var(--border-color);
