@@ -139,45 +139,73 @@ El cliente no puede crear, editar ni eliminar usuarios o productos.
 ## 🗂️ Estructura del Proyecto
 
 ```text
-ysbooks-vue/
+ysbooks/
+├── node_modules/
 ├── public/
+│   ├── assets/
+│   ├── covers/
+│   ├── pedidos.json
 │   ├── products.json
 │   └── usuarios.json
 │
 ├── src/
-│   ├── assets/
-│   ├── App.vue
-│   ├── main.js
+│   ├── components/
+│   │   ├── CartDrawer.vue
+│   │   ├── FooterComponent.vue
+│   │   ├── NavbarComponent.vue
+│   │   ├── ProductCardComponent.vue
+│   │   ├── ProductDeleteConfirm.vue
+│   │   ├── ProductDetailModal.vue
+│   │   ├── ProductForm.vue
+│   │   ├── ProductList.vue
+│   │   ├── SidebarComponent.vue
+│   │   ├── UserDeleteConfirm.vue
+│   │   ├── UserForm.vue
+│   │   └── UserList.vue
+│   │
+│   ├── composables/
+│   │   └── useAlert.js
 │   │
 │   ├── router/
 │   │   └── index.js
 │   │
 │   ├── services/
+│   │   ├── apiClient.js
 │   │   ├── authService.js
+│   │   ├── cartService.js
+│   │   ├── orderService.js
 │   │   ├── productService.js
-│   │   └── servicios API
+│   │   └── userService.js
 │   │
-│   ├── components/
-│   │   ├── NavbarComponent.vue
-│   │   ├── SidebarComponent.vue
-│   │   ├── FooterComponent.vue
-│   │   └── ProductCardComponent.vue
-│   │
-│   ├── composables/
-│   ├── stores/
 │   ├── utils/
+│   │   ├── bookCover.js
+│   │   ├── passwordHash.js
+│   │   ├── roles.js
+│   │   └── storage.js
 │   │
 │   └── views/
-│       ├── LoginView.vue
+│       ├── AutoresView.vue
+│       ├── CatalogoView.vue
+│       ├── ClientesView.vue
 │       ├── DashboardView.vue
 │       ├── InicioView.vue
-│       ├── CatalogoView.vue
+│       ├── LoginView.vue
 │       ├── OfertasView.vue
-│       ├── ProductView.vue
-│       ├── ClientesView.vue
 │       ├── PedidosView.vue
-│       ├── UsuariosView.vue
-│       └── PerfilView.vue
+│       ├── PerfilView.vue
+│       ├── ProductView.vue
+│       └── UsuariosView.vue
+│
+├── App.vue
+├── main.js
+├── .env
+├── .env.example
+├── .gitignore
+├── index.html
+├── package-lock.json
+├── package.json
+├── vite.config.js
+└── README.md
 ```
 
 ---
