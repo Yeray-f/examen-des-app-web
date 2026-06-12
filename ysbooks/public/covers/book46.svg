@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600">
-    <rect width="100%" height="100%" fill="#be123c"/>
-    <rect x="20" y="20" width="360" height="560" rx="24" fill="rgba(0,0,0,0.18)" stroke="rgba(255,255,255,0.15)"/>
-    <text x="40" y="220" fill="white" font-size="34" font-family="Arial" font-weight="700">Shoe Dog: Edición Jóvenes Le</text>
-    <text x="40" y="520" fill="#ddd" font-size="24" font-family="Arial">Phil Knight</text>
-    </svg>
