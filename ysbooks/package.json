@@ -1,7 +1,7 @@
 {
-  "name": "segundo-parcial-des-app-web",
+  "name": "app-crud-api",
   "version": "1.0.0",
-  "description": "YS Books — Aplicación Web Modularizada con Vue.js 3 y Bootstrap 5",
+  "description": "CRUD académico con Vue 3, Bootstrap 5, Axios y MockAPI",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "vue": "^3.4.0",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
+    "axios": "^1.9.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.0",

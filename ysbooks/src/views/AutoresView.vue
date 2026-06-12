@@ -62,7 +62,7 @@
           <img
             v-for="libro in autor.libros.slice(0,3)"
             :key="libro.id"
-            :src="libro.image || '/assets/covers/cover-fallback.svg'"
+            :src="libro.image || $resolveCover(null, { title: 'Libro', id: 0 })"
             :alt="libro.name"
             class="cover-strip"
             loading="lazy"
@@ -89,7 +89,7 @@
     </div>
 
     <!-- Modal detalle del autor -->
-    <div v-if="autorSeleccionado" class="modal-overlay-ys" @click.self="cerrarModal">
+    <div v-if="autorSeleccionado" class="modal fade show d-block" tabindex="-1" role="dialog" aria-modal="true" @click.self="cerrarModal">
       <div class="modal-autor">
         <button class="modal-x-btn" @click="cerrarModal"><i class="bi bi-x"></i></button>
 
@@ -114,7 +114,7 @@
         <div class="modal-libros-grid">
           <div v-for="libro in autorSeleccionado.libros" :key="libro.id" class="modal-libro-card">
             <div class="modal-libro-cover">
-              <img :src="libro.image || '/assets/covers/cover-fallback.svg'" :alt="libro.name" @error="onCoverError" />
+              <img :src="libro.image || $resolveCover(null, { title: 'Libro', id: 0 })" :alt="libro.name" @error="onCoverError" />
             </div>
             <div class="modal-libro-info">
               <p class="modal-libro-title">{{ libro.name }}</p>
@@ -218,7 +218,7 @@ export default {
     seleccionarAutor(autor) { this.autorSeleccionado = autor },
     cerrarModal() { this.autorSeleccionado = null },
     formatPrecio(p) { return Number(p).toLocaleString('es-CO') },
-    onCoverError(e) { e.target.src = '/assets/covers/cover-fallback.svg' },
+    onCoverError(e) { e.target.src = this.$resolveCover(null, { title: 'Libro', id: 0 }) },
     onAvatarError(e) {
       e.target.src = '/assets/authors/avatar-fallback.svg'
     }
@@ -284,7 +284,6 @@ export default {
 .autor-stat i { color:var(--violet-lt); }
 
 /* Modal */
-.modal-overlay-ys { position:fixed; inset:0; background:rgba(0,0,0,.65); backdrop-filter:blur(4px); z-index:500; display:flex; align-items:center; justify-content:center; padding:16px; }
 .modal-autor { background:var(--bg-dark); border:1px solid var(--border-color); border-radius:var(--r-lg); width:100%; max-width:540px; max-height:88vh; overflow-y:auto; position:relative; padding:24px; }
 .modal-autor::-webkit-scrollbar { width:4px; }
 .modal-autor::-webkit-scrollbar-thumb { background:var(--border-color); border-radius:4px; }

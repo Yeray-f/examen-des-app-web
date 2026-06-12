@@ -1,8 +1,5 @@
 <template>
-  <!-- LoginView: vista de inicio de sesión que valida desde usuarios.json -->
   <div class="login-wrapper">
-
-    <!-- Fondo decorativo con libros (mantenemos el estilo visual de YS Books) -->
     <div class="login-bg" aria-hidden="true">
       <svg viewBox="0 0 1440 810" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -23,7 +20,6 @@
         <rect width="1440" height="810" fill="url(#roomBg)"/>
         <rect width="1440" height="810" fill="url(#luzVioleta)"/>
         <rect width="1440" height="810" fill="url(#luzAzul)"/>
-        <!-- Estantes decorativos -->
         <rect x="0" y="542" width="430" height="16" fill="#0d1240" rx="2"/>
         <rect x="0" y="402" width="385" height="14" fill="#0d1240" rx="2"/>
         <rect x="10"  y="480" width="48" height="62" fill="#0a0e30" rx="2"/>
@@ -34,7 +30,6 @@
         <rect x="238" y="468" width="50" height="74" fill="#151c6e" rx="2"/>
         <rect x="290" y="476" width="42" height="66" fill="#283593" rx="2"/>
         <rect x="334" y="462" width="46" height="80" fill="#0a0e30" rx="2"/>
-        <!-- Libros derecha -->
         <rect x="1010" y="475" width="44" height="67" fill="#1a237e" rx="2"/>
         <rect x="1056" y="463" width="36" height="79" fill="#0d1240" rx="2"/>
         <rect x="1094" y="471" width="50" height="71" fill="#111845" rx="2"/>
@@ -47,9 +42,7 @@
       </svg>
     </div>
 
-    <!-- Tarjeta del formulario de login -->
     <div class="login-card">
-      <!-- Logo y nombre -->
       <div class="text-center mb-4">
         <svg viewBox="0 0 40 40" fill="none" width="48" class="mb-2">
           <rect width="40" height="40" rx="10" fill="url(#lgLogin)"/>
@@ -66,36 +59,22 @@
         <p class="login-subtitle">Tu universo de libros</p>
       </div>
 
-      <!-- Alerta de error Bootstrap (se muestra si hay error de login) -->
-      <div
-        v-if="errorMsg"
-        class="alert alert-danger d-flex align-items-center gap-2 py-2"
-        role="alert"
-      >
+      <div v-if="errorMsg" class="alert alert-danger d-flex align-items-center gap-2 py-2" role="alert">
         <i class="bi bi-exclamation-triangle-fill"></i>
         <span>{{ errorMsg }}</span>
       </div>
 
-      <!-- Alerta de éxito -->
-      <div
-        v-if="exitoMsg"
-        class="alert alert-success d-flex align-items-center gap-2 py-2"
-        role="alert"
-      >
+      <div v-if="exitoMsg" class="alert alert-success d-flex align-items-center gap-2 py-2" role="alert">
         <i class="bi bi-check-circle-fill"></i>
         <span>{{ exitoMsg }}</span>
       </div>
 
-      <!-- Formulario de login -->
-      <form @submit.prevent="iniciarSesion" novalidate>
-        <!-- Campo usuario -->
+      <form @submit.prevent="submitLogin" novalidate>
         <div class="mb-3">
-          <label for="usuario" class="form-label login-label">
-            <i class="bi bi-person me-1"></i>Usuario
-          </label>
+          <label for="usuario" class="form-label login-label"><i class="bi bi-person me-1"></i>Usuario</label>
           <input
             id="usuario"
-            v-model="formulario.usuario"
+            v-model.trim="formulario.usuario"
             type="text"
             class="form-control login-input"
             placeholder="Ingresa tu usuario"
@@ -103,11 +82,8 @@
           />
         </div>
 
-        <!-- Campo contraseña -->
         <div class="mb-4">
-          <label for="password" class="form-label login-label">
-            <i class="bi bi-lock me-1"></i>Contraseña
-          </label>
+          <label for="password" class="form-label login-label"><i class="bi bi-lock me-1"></i>Contraseña</label>
           <div class="input-group">
             <input
               id="password"
@@ -117,23 +93,13 @@
               placeholder="Ingresa tu contraseña"
               autocomplete="current-password"
             />
-            <button
-              type="button"
-              class="btn login-eye-btn"
-              @click="mostrarPassword = !mostrarPassword"
-              :title="mostrarPassword ? 'Ocultar' : 'Mostrar'"
-            >
+            <button type="button" class="btn login-eye-btn" @click="mostrarPassword = !mostrarPassword" :title="mostrarPassword ? 'Ocultar' : 'Mostrar'">
               <i :class="mostrarPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
             </button>
           </div>
         </div>
 
-        <!-- Botón submit -->
-        <button
-          type="submit"
-          class="btn btn-primary w-100 login-btn"
-          :disabled="cargando"
-        >
+        <button type="submit" class="btn btn-primary w-100 login-btn" :disabled="cargando">
           <span v-if="cargando">
             <span class="spinner-border spinner-border-sm me-2" role="status"></span>
             Verificando...
@@ -144,23 +110,21 @@
         </button>
       </form>
 
-      <!-- Nota educativa importante -->
       <p class="login-nota mt-3">
-        <i class="bi bi-info-circle me-1"></i>
-        <strong>Nota educativa:</strong> Esta validación es solo con fines académicos.
-        No representa un sistema de autenticación real.
+        <i class="bi bi-shield-lock me-1"></i>
+        La autenticación se valida exclusivamente contra MockAPI. Si el servicio no responde, el acceso se bloquea.
       </p>
-
-      <!-- Credenciales de prueba para facilitar la evaluación -->
-      <div class="login-hint mt-2">
-        <small>Usuario: <code>admin</code> · Contraseña: <code>libreria2026</code></small>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { cargarUsuarios, validarCredenciales, guardarSesion } from '../services/authService.js'
+import { iniciarSesion as authLogin, obtenerSesion, obtenerRolActual } from '../services/authService.js'
+import { ROLES } from '../utils/roles.js'
+
+function destinoPorRol(rol) {
+  return rol === ROLES.ADMIN ? '/dashboard/inicio' : '/dashboard/catalogo'
+}
 
 export default {
   name: 'LoginView',
@@ -173,26 +137,17 @@ export default {
       errorMsg: '',
       exitoMsg: '',
       cargando: false,
-      mostrarPassword: false,
-      usuarios: [] // Se carga desde usuarios.json
+      mostrarPassword: false
     }
   },
-  async created() {
-    // Si ya hay sesión activa, redirigir al dashboard directamente
-    if (sessionStorage.getItem('ysbooks_auth') === 'true') {
-      this.$router.push('/dashboard')
-      return
-    }
-    // Cargamos los usuarios desde el archivo JSON
-    try {
-      this.usuarios = await cargarUsuarios()
-    } catch (e) {
-      console.error('Error cargando usuarios:', e)
+  created() {
+    const sesion = obtenerSesion()
+    if (sesion) {
+      this.$router.replace(destinoPorRol(obtenerRolActual()))
     }
   },
   methods: {
-    async iniciarSesion() {
-      // Validar que los campos no estén vacíos
+    async submitLogin() {
       if (!this.formulario.usuario || !this.formulario.password) {
         this.errorMsg = 'Por favor completa todos los campos.'
         return
@@ -200,30 +155,20 @@ export default {
 
       this.cargando = true
       this.errorMsg = ''
+      this.exitoMsg = ''
 
-      // Pequeño delay para simular validación
-      await new Promise(r => setTimeout(r, 600))
-
-      // Validamos contra el JSON de usuarios
-      const usuarioEncontrado = validarCredenciales(
-        this.formulario.usuario,
-        this.formulario.password,
-        this.usuarios
-      )
-
-      if (usuarioEncontrado) {
-        // Guardamos sesión y redirigimos al dashboard
-        guardarSesion(usuarioEncontrado)
-        this.exitoMsg = `¡Bienvenido/a, ${usuarioEncontrado.nombre}!`
+      try {
+        const sesion = await authLogin(this.formulario.usuario.trim(), this.formulario.password)
+        this.exitoMsg = `¡Bienvenido/a, ${sesion.user.nombre}!`
         setTimeout(() => {
-          this.$router.push('/dashboard')
-        }, 700)
-      } else {
-        this.errorMsg = 'Usuario o contraseña incorrectos. Inténtalo de nuevo.'
+          this.$router.replace(destinoPorRol(sesion.user.role))
+        }, 400)
+      } catch (error) {
+        this.errorMsg = error?.message || 'No se pudo iniciar sesión.'
         this.formulario.password = ''
+      } finally {
+        this.cargando = false
       }
-
-      this.cargando = false
     }
   }
 }
@@ -273,97 +218,38 @@ export default {
   margin: 0;
 }
 
-.login-title--highlight {
-  color: var(--violet-lt);
-}
+.login-title--highlight { color: var(--violet-lt); }
+.login-subtitle { color: var(--text-secondary); font-size: 0.88rem; margin-top: 2px; }
 
-.login-subtitle {
-  color: var(--text-secondary);
-  font-size: 0.85rem;
-  margin: 4px 0 0;
-}
-
-.login-label {
-  color: var(--text-secondary);
-  font-size: 0.82rem;
-  font-weight: 500;
-  margin-bottom: 6px;
-}
+.login-label { color: var(--text-secondary); font-size: 0.84rem; font-weight: 500; }
 
 .login-input {
-  background: rgba(30, 45, 71, 0.8) !important;
+  background: rgba(30, 45, 71, 0.88) !important;
   border: 1px solid rgba(99, 120, 180, 0.25) !important;
   color: var(--text-primary) !important;
-  border-radius: var(--r-sm) !important;
-  padding: 10px 14px;
+  border-right: 0;
 }
 
 .login-input:focus {
-  border-color: var(--violet) !important;
   box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.25) !important;
-}
-
-.login-input::placeholder {
-  color: var(--text-muted) !important;
+  border-color: var(--violet) !important;
 }
 
 .login-eye-btn {
-  background: rgba(30, 45, 71, 0.8);
-  border: 1px solid rgba(99, 120, 180, 0.25);
-  border-left: none;
-  color: var(--text-secondary);
-  border-radius: 0 var(--r-sm) var(--r-sm) 0 !important;
+  background: rgba(30, 45, 71, 0.88) !important;
+  border: 1px solid rgba(99, 120, 180, 0.25) !important;
+  color: var(--text-secondary) !important;
 }
 
-.login-eye-btn:hover {
-  color: var(--violet-lt);
-}
-
-.login-btn {
-  padding: 11px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  letter-spacing: 0.3px;
-  border-radius: var(--r-sm) !important;
-  transition: all 0.2s;
-}
+.login-btn { font-weight: 700; padding: 0.85rem 1rem; }
 
 .login-nota {
-  color: var(--text-muted);
-  font-size: 0.75rem;
-  text-align: center;
-  line-height: 1.5;
-  border-top: 1px solid var(--border-color);
-  padding-top: 12px;
-  margin-bottom: 0;
-}
-
-.login-hint {
-  text-align: center;
   color: var(--text-secondary);
-  font-size: 0.78rem;
-}
-
-.login-hint code {
-  background: rgba(124, 58, 237, 0.15);
-  color: var(--violet-lt);
-  padding: 1px 5px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-}
-
-/* Sobrescribir alertas Bootstrap para el tema oscuro */
-.alert-danger {
-  background: rgba(239, 68, 68, 0.15) !important;
-  border-color: rgba(239, 68, 68, 0.3) !important;
-  color: #fca5a5 !important;
-  font-size: 0.83rem;
-}
-
-.alert-success {
-  background: rgba(16, 185, 129, 0.15) !important;
-  border-color: rgba(16, 185, 129, 0.3) !important;
-  color: #6ee7b7 !important;
-  font-size: 0.83rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  border-radius: 12px;
+  padding: 0.8rem 0.9rem;
 }
 </style>

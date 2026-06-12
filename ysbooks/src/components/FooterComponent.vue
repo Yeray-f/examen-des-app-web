@@ -36,7 +36,7 @@
       <div class="footer-col">
         <h4>Cuenta</h4>
         <router-link to="/dashboard/perfil">Mi perfil</router-link>
-        <router-link :to="{ path: '/dashboard/perfil', query: { tab: 'pedidos' } }">Mis pedidos</router-link>
+        <router-link to="/dashboard/pedidos">Mis pedidos</router-link>
         <router-link :to="{ path: '/dashboard/perfil', query: { tab: 'deseos' } }">Lista de deseos</router-link>
         <router-link :to="{ path: '/dashboard/perfil', query: { tab: 'configuracion' } }">Configuración</router-link>
       </div>

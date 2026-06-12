@@ -2,19 +2,31 @@
   {
     "id": 1,
     "usuario": "admin",
-    "password": "libreria2026",
-    "nombre": "Administrador YS Books"
+    "nombre": "Administrador YS Books",
+    "role": "admin",
+    "email": "admin@ysbooks.local",
+    "activo": true,
+    "passwordSalt": "14a234d95b2e8074",
+    "passwordHash": "sha256:14a234d95b2e8074:9e0d17b0f84f5b8a498b2a554cfeb2904147505b5b789fcd354e4ad6a93a56d2"
   },
   {
     "id": 2,
     "usuario": "yeray",
-    "password": "yeray123",
-    "nombre": "Yeray Álvarez"
+    "nombre": "Yeray Álvarez",
+    "role": "admin",
+    "email": "yeray@ysbooks.local",
+    "activo": true,
+    "passwordSalt": "39e7b94629817e0a",
+    "passwordHash": "sha256:39e7b94629817e0a:be296c0f4b364f6a9c65f156f147507f223b00cf95e34bf354825a127eaf648c"
   },
   {
     "id": 3,
     "usuario": "skarik",
-    "password": "skarik123",
-    "nombre": "Skarik Barbosa"
+    "nombre": "Skarik Barbosa",
+    "role": "cliente",
+    "email": "skarik@ysbooks.local",
+    "activo": true,
+    "passwordSalt": "7739a7fc66c4d1d2",
+    "passwordHash": "sha256:7739a7fc66c4d1d2:4c0c3a0dbc4a4e69477cd737d15376e4e6d514f04f4eec02bce642ba93f7094a"
   }
 ]

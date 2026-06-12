@@ -15,7 +15,7 @@
     </div>
 
     <nav class="sidebar-nav d-flex flex-column align-items-center gap-1 w-100">
-      <router-link to="/dashboard" exact class="sb-link" active-class="sb-link--active" title="Inicio">
+      <router-link v-if="esAdmin" to="/dashboard/inicio" class="sb-link" active-class="sb-link--active" title="Inicio">
         <i class="bi bi-house-door-fill"></i>
         <span class="sb-label">Inicio</span>
       </router-link>
@@ -23,21 +23,33 @@
         <i class="bi bi-grid-fill"></i>
         <span class="sb-label">Libros</span>
       </router-link>
-      <router-link to="/dashboard/productos" class="sb-link" active-class="sb-link--active" title="Gestión">
-        <i class="bi bi-book-fill"></i>
-        <span class="sb-label">Gestión</span>
-      </router-link>
-      <router-link to="/dashboard/clientes" class="sb-link" active-class="sb-link--active" title="Clientes">
-        <i class="bi bi-people-fill"></i>
-        <span class="sb-label">Clientes</span>
-      </router-link>
-      <router-link to="/dashboard/autores" class="sb-link" active-class="sb-link--active" title="Autores">
-        <i class="bi bi-person-lines-fill"></i>
-        <span class="sb-label">Autores</span>
-      </router-link>
       <router-link to="/dashboard/ofertas" class="sb-link" active-class="sb-link--active" title="Ofertas">
         <i class="bi bi-tags-fill"></i>
         <span class="sb-label">Ofertas</span>
+      </router-link>
+      <router-link to="/dashboard/pedidos" class="sb-link" active-class="sb-link--active" title="Pedidos">
+        <i class="bi bi-receipt-cutoff"></i>
+        <span class="sb-label">Pedidos</span>
+      </router-link>
+      <router-link v-if="esAdmin" to="/dashboard/usuarios" class="sb-link" active-class="sb-link--active" title="Usuarios">
+        <i class="bi bi-people-fill"></i>
+        <span class="sb-label">Usuarios</span>
+      </router-link>
+      <router-link v-if="esAdmin" to="/dashboard/productos" class="sb-link" active-class="sb-link--active" title="Productos">
+        <i class="bi bi-book-fill"></i>
+        <span class="sb-label">Productos</span>
+      </router-link>
+      <router-link v-if="esAdmin" to="/dashboard/clientes" class="sb-link" active-class="sb-link--active" title="Clientes">
+        <i class="bi bi-people-fill"></i>
+        <span class="sb-label">Clientes</span>
+      </router-link>
+      <router-link v-if="esAdmin" to="/dashboard/autores" class="sb-link" active-class="sb-link--active" title="Autores">
+        <i class="bi bi-person-lines-fill"></i>
+        <span class="sb-label">Autores</span>
+      </router-link>
+      <router-link to="/dashboard/perfil" class="sb-link" active-class="sb-link--active" title="Perfil">
+        <i class="bi bi-person-badge-fill"></i>
+        <span class="sb-label">Perfil</span>
       </router-link>
     </nav>
 
@@ -50,9 +62,19 @@
 
 <script>
 import { cartStore } from '../services/cartService.js'
+import { normalizeRole, ROLES } from '../utils/roles.js'
+
 export default {
   name: 'SidebarComponent',
-  data() { return { cart: cartStore } }
+  props: {
+    role: { type: String, default: ROLES.CLIENTE }
+  },
+  data() { return { cart: cartStore } },
+  computed: {
+    esAdmin() {
+      return normalizeRole(this.role) === ROLES.ADMIN
+    }
+  }
 }
 </script>
 

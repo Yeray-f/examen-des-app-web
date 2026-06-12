@@ -86,7 +86,7 @@
             <article v-for="pedido in pedidosDemo" :key="pedido.id" class="pedido-card">
               <div>
                 <h4>Pedido #{{ pedido.id }}</h4>
-                <p>{{ pedido.fecha }} · {{ pedido.items }} libros</p>
+                <p>{{ formatPedidoFecha(pedido.fecha) }} · {{ pedido.items }} libros</p>
               </div>
               <span class="pedido-status" :class="'pedido-status--' + pedido.estado">{{ pedido.estadoTexto }}</span>
             </article>
@@ -131,8 +131,9 @@
 </template>
 
 <script>
-import { obtenerNombreUsuario } from '../services/authService.js'
+import { obtenerNombreUsuario, obtenerUsuarioActual } from '../services/authService.js'
 import { obtenerProductos } from '../services/productService.js'
+import { obtenerPedidosPorUsuario } from '../services/orderService.js'
 
 export default {
   name: 'PerfilView',
@@ -148,11 +149,7 @@ export default {
         { key: 'pedidos', label: 'Pedidos' },
         { key: 'configuracion', label: 'Configuración' }
       ],
-      pedidosDemo: [
-        { id: 1042, fecha: 'Hoy', items: 3, estado: 'entregado', estadoTexto: 'Entregado' },
-        { id: 1031, fecha: 'Ayer', items: 2, estado: 'en_camino', estadoTexto: 'En camino' },
-        { id: 1018, fecha: 'Hace 4 días', items: 1, estado: 'preparando', estadoTexto: 'Preparando' }
-      ]
+      pedidosDemo: []
     }
   },
   computed: {
@@ -175,13 +172,41 @@ export default {
       }
     }
   },
+  created() {
+    this.cargarPedidos()
+  },
+  mounted() {
+    window.addEventListener('ysbooks-orders-updated', this.cargarPedidos)
+  },
+  beforeUnmount() {
+    window.removeEventListener('ysbooks-orders-updated', this.cargarPedidos)
+  },
   methods: {
     formatPrecio(price) { return Number(price).toLocaleString('es-CO') },
+    formatPedidoFecha(value) {
+      if (!value) return 'Sin fecha'
+      try {
+        return new Intl.DateTimeFormat('es-CO', { day: '2-digit', month: 'short', year: 'numeric' }).format(new Date(value))
+      } catch {
+        return value
+      }
+    },
     onImgError(e) {
       if (e?.target) {
         e.target.onerror = null
-        e.target.src = '/assets/covers/cover-fallback.svg'
+        e.target.src = this.$resolveCover(null, { title: 'Libro', id: 0 })
       }
+    },
+    cargarPedidos() {
+      const usuario = obtenerUsuarioActual()
+      this.pedidosDemo = usuario ? obtenerPedidosPorUsuario(usuario).map(pedido => ({
+        id: pedido.id,
+        fecha: pedido.createdAt,
+        items: pedido.items.reduce((sum, item) => sum + Number(item.cantidad || 1), 0),
+        estado: pedido.estado,
+        estadoTexto: pedido.estado === 'pendiente' ? 'Pendiente' : pedido.estado === 'aprobado' ? 'Aprobado' : pedido.estado === 'rechazado' ? 'Rechazado' : pedido.estado === 'preparando' ? 'Preparando' : 'Entregado',
+        total: pedido.total
+      })) : []
     }
   }
 }

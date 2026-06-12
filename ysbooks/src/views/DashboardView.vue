@@ -1,8 +1,8 @@
 <template>
   <div class="dashboard-wrapper">
-    <NavbarComponent :nombreUsuario="nombreUsuario" @logout="cerrarSesion" />
+    <NavbarComponent :nombreUsuario="nombreUsuario" :role="rolUsuario" @logout="cerrarSesion" />
     <div class="dashboard-body">
-      <SidebarComponent />
+      <SidebarComponent :role="rolUsuario" />
       <main class="dashboard-main">
         <router-view />
         <FooterComponent />
@@ -103,6 +103,27 @@
           </div>
         </section>
 
+        <!-- Pedidos pendientes -->
+        <section v-if="esAdmin" class="rp-section rp-section--orders">
+          <div class="panel-header">
+            <h3>Pedidos pendientes</h3>
+            <router-link to="/dashboard/pedidos" class="ver-todos-btn">Gestionar</router-link>
+          </div>
+          <div v-if="pedidosPendientes.length" class="orders-mini-list">
+            <article v-for="pedido in pedidosPendientes" :key="pedido.id" class="order-mini">
+              <div>
+                <p class="order-mini__code">Pedido #{{ pedido.id }}</p>
+                <p class="order-mini__meta">{{ pedido.usuarioNombre }} · {{ formatPrecio(pedido.total) }}</p>
+              </div>
+              <div class="order-mini-actions">
+                <button type="button" class="btn-action btn-action--info" title="Aprobar" @click="validarPedido(pedido.id)"><i class="bi bi-check2"></i></button>
+                <button type="button" class="btn-action btn-action--delete" title="Rechazar" @click="rechazarPedido(pedido.id)"><i class="bi bi-x-lg"></i></button>
+              </div>
+            </article>
+          </div>
+          <div v-else class="panel-empty">No hay pedidos pendientes.</div>
+        </section>
+
         <!-- Oferta del día -->
         <section class="rp-section oferta-dia-box">
           <div class="oferta-header">
@@ -141,8 +162,9 @@ import NavbarComponent from '../components/NavbarComponent.vue'
 import SidebarComponent from '../components/SidebarComponent.vue'
 import FooterComponent from '../components/FooterComponent.vue'
 import CartDrawer from '../components/CartDrawer.vue'
-import { cerrarSesion as logoutSvc, obtenerNombreUsuario } from '../services/authService.js'
+import { cerrarSesion as logoutSvc, obtenerNombreUsuario, obtenerRolActual } from '../services/authService.js'
 import { obtenerProductos } from '../services/productService.js'
+import { obtenerPedidos, actualizarEstadoPedido, cargarPedidosIniciales, etiquetaEstadoPedido, ESTADOS_PEDIDO } from '../services/orderService.js'
 
 
 export default {
@@ -151,7 +173,9 @@ export default {
   data() {
     return {
       nombreUsuario: obtenerNombreUsuario(),
+      rolUsuario: obtenerRolActual(),
       recRatings: ['4.6', '4.4', '4.5', '4.3', '4.4', '4.6', '4.5', '4.3'],
+      pedidos: [],
       categoriasPanel: [
         { nombre: 'Arte', icon: 'bi bi-palette-fill' },
         { nombre: 'Negocios', icon: 'bi bi-briefcase-fill' },
@@ -175,6 +199,9 @@ export default {
     }
   },
   computed: {
+    pedidosPendientes() {
+      return this.pedidos.filter(pedido => pedido.estado === ESTADOS_PEDIDO.PENDIENTE).slice(0, 3)
+    },
     recomendados() {
       return obtenerProductos().slice(0, 8)
     },
@@ -189,13 +216,17 @@ export default {
       return `${String(h).padStart(2,'0')}h : ${String(m).padStart(2,'0')}m : ${String(s).padStart(2,'0')}s`
     }
   },
-  mounted() {
+  async mounted() {
+    this.rolUsuario = obtenerRolActual()
+    await this.cargarPedidos()
+    window.addEventListener('ysbooks-orders-updated', this.cargarPedidos)
     this.timerInterval = setInterval(() => {
       if (this.timerSeconds > 0) this.timerSeconds--
     }, 1000)
   },
   beforeUnmount() {
     clearInterval(this.timerInterval)
+    window.removeEventListener('ysbooks-orders-updated', this.cargarPedidos)
   },
   methods: {
     cerrarSesion() {
@@ -207,7 +238,7 @@ export default {
     },
     formatPrecio(p) { return Number(p).toLocaleString('es-CO') },
     onImgError(e) {
-      const src = '/assets/covers/cover-fallback.svg'
+      const src = this.$resolveCover(null, { title: 'Libro', id: 0 })
       if (e?.target) {
         e.target.onerror = null
         e.target.src = src
@@ -219,6 +250,18 @@ export default {
         e.target.onerror = null
         e.target.src = src
       }
+    },
+    async cargarPedidos() {
+      await cargarPedidosIniciales()
+      this.pedidos = obtenerPedidos()
+    },
+    validarPedido(id) {
+      const pedido = actualizarEstadoPedido(id, ESTADOS_PEDIDO.APROBADO, 'Validado desde el panel principal')
+      if (pedido) this.pedidos = obtenerPedidos()
+    },
+    rechazarPedido(id) {
+      const pedido = actualizarEstadoPedido(id, ESTADOS_PEDIDO.RECHAZADO, 'Rechazado desde el panel principal')
+      if (pedido) this.pedidos = obtenerPedidos()
     }
   }
 }
@@ -242,6 +285,14 @@ export default {
   flex-direction: column;
   gap: 12px;
 }
+
+.rp-section--orders { padding-bottom: 14px; }
+.orders-mini-list { display: flex; flex-direction: column; gap: 10px; }
+.order-mini { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: rgba(255,255,255,.03); border: 1px solid rgba(124,58,237,.08); border-radius: 14px; padding: 10px 12px; }
+.order-mini__code { margin: 0; font-size: 12px; font-weight: 800; color: var(--text-primary); }
+.order-mini__meta { margin: 0; font-size: 11px; color: var(--text-secondary); }
+.order-mini-actions { display: flex; gap: 6px; }
+.panel-empty { padding: 12px 0 2px; color: var(--text-muted); font-size: 12px; }
 
 .rp-section {
   background: rgba(17,24,39,.82);

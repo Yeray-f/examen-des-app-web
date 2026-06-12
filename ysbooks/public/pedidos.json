@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "usuarioId": 3,
+    "usuario": "skarik",
+    "usuarioNombre": "Skarik Barbosa",
+    "role": "cliente",
+    "estado": "pendiente",
+    "metodoPago": "Tarjeta",
+    "notas": "Entrega prioritaria",
+    "direccion": "",
+    "telefono": "",
+    "items": [
+      {
+        "id": 1,
+        "name": "Roba como un artista",
+        "author": "Austin Kleon",
+        "price": 72000,
+        "cantidad": 1,
+        "image": "/covers/book1.png"
+      },
+      {
+        "id": 3,
+        "name": "Roba a un artista: El diario",
+        "author": "Austin Kleon",
+        "price": 82143,
+        "cantidad": 1,
+        "image": "/covers/book3.png"
+      }
+    ],
+    "subtotal": 154143,
+    "descuento": 0,
+    "total": 154143,
+    "observacion": "Pendiente de validación",
+    "createdAt": "2026-06-05T10:20:00.000Z",
+    "updatedAt": "2026-06-05T10:20:00.000Z"
+  },
+  {
+    "id": 2,
+    "usuarioId": 3,
+    "usuario": "skarik",
+    "usuarioNombre": "Skarik Barbosa",
+    "role": "cliente",
+    "estado": "aprobado",
+    "metodoPago": "Transferencia",
+    "notas": "",
+    "direccion": "",
+    "telefono": "",
+    "items": [
+      {
+        "id": 5,
+        "name": "Sigue avanzando (Keep Going)",
+        "author": "Austin Kleon",
+        "price": 65477,
+        "cantidad": 1,
+        "image": "/covers/book5.png"
+      },
+      {
+        "id": 6,
+        "name": "Show Your Work!",
+        "author": "Austin Kleon",
+        "price": 68900,
+        "cantidad": 1,
+        "image": "/covers/book6.png"
+      }
+    ],
+    "subtotal": 134377,
+    "descuento": 0,
+    "total": 134377,
+    "observacion": "Aprobado por administración",
+    "createdAt": "2026-06-04T14:35:00.000Z",
+    "updatedAt": "2026-06-04T15:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "usuarioId": 3,
+    "usuario": "skarik",
+    "usuarioNombre": "Skarik Barbosa",
+    "role": "cliente",
+    "estado": "preparando",
+    "metodoPago": "Efectivo",
+    "notas": "",
+    "direccion": "",
+    "telefono": "",
+    "items": [
+      {
+        "id": 8,
+        "name": "Mujeres que corren con los lobos",
+        "author": "Clarissa Pinkola Estés",
+        "price": 85422,
+        "cantidad": 2,
+        "image": "/covers/book8.png"
+      }
+    ],
+    "subtotal": 170844,
+    "descuento": 0,
+    "total": 170844,
+    "observacion": "Preparando despacho",
+    "createdAt": "2026-06-03T09:15:00.000Z",
+    "updatedAt": "2026-06-03T10:05:00.000Z"
+  }
+]

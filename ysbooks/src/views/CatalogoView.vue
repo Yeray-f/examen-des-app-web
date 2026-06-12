@@ -35,11 +35,11 @@
       <p>No se encontraron libros con ese filtro.</p>
     </div>
     <div v-if="toast" class="ys-toast"><i class="bi bi-check-circle-fill text-success me-2"></i>{{ toast }}</div>
-    <div v-if="libroSeleccionado" class="modal-overlay-ys" @click.self="cerrarDetalle">
+    <div v-if="libroSeleccionado" class="modal fade show d-block" tabindex="-1" role="dialog" aria-modal="true" @click.self="cerrarDetalle">
       <div class="modal-ys">
         <button class="modal-x-btn" @click="cerrarDetalle"><i class="bi bi-x"></i></button>
         <div class="modal-cover">
-          <img :src="libroSeleccionado.image || '/assets/covers/cover-fallback.svg'" :alt="libroSeleccionado.name" />
+          <img :src="$resolveCover(libroSeleccionado.image, { title: libroSeleccionado.name, id: libroSeleccionado.id })" :alt="libroSeleccionado.name" @error="e => { e.target.onerror = null; e.target.src = $resolveCover(null, { title: libroSeleccionado.name, id: libroSeleccionado.id }) }" />
         </div>
         <div class="modal-info">
           <span class="modal-cat">{{ libroSeleccionado.category }}</span>
@@ -138,7 +138,6 @@ export default {
 .books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 14px; }
 .empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); }
 .ys-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--bg-elevated); border: 1px solid var(--border-color); color: var(--text-primary); padding: 10px 20px; border-radius: 30px; font-size: 13px; font-weight: 500; box-shadow: var(--shadow-md); z-index: 9999; white-space: nowrap; display: flex; align-items: center; }
-.modal-overlay-ys { position: fixed; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(3px); z-index: 500; display: flex; align-items: center; justify-content: center; padding: 16px; }
 .modal-ys { background: var(--bg-dark); border: 1px solid var(--border-color); border-radius: var(--r-lg); width: 100%; max-width: 420px; overflow: hidden; position: relative; }
 .modal-x-btn { position: absolute; top: 12px; right: 12px; width: 30px; height: 30px; border-radius: 50%; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-secondary); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; font-size: 16px; transition: all .2s; }
 .modal-x-btn:hover { border-color: var(--violet); color: var(--text-primary); }

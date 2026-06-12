@@ -46,8 +46,7 @@ export default {
   emits: ['verDetalle', 'agregar'],
   data() {
     return {
-      esFavorito: false,
-      fallbackCover: '/assets/covers/cover-fallback.svg'
+      esFavorito: false
     }
   },
   computed: {
@@ -56,7 +55,7 @@ export default {
       return PALETA[idx]
     },
     coverSrc() {
-      return this.producto.image || this.fallbackCover
+      return this.$resolveCover(this.producto.image, { title: this.producto.name, id: this.producto.id })
     }
   },
   methods: {
@@ -67,7 +66,7 @@ export default {
     onImgError(e) {
       if (e?.target) {
         e.target.onerror = null
-        e.target.src = this.fallbackCover
+        e.target.src = this.$resolveCover(null, { title: this.producto.name, id: this.producto.id })
       }
     },
     formatPrecio(price) {

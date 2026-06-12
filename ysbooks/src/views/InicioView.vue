@@ -85,7 +85,7 @@
         <div v-for="oferta in ofertasEspeciales" :key="oferta.id" class="offer-card">
           <div class="offer-cover">
             <span class="offer-discount">-{{ oferta.descuento }}%</span>
-            <img v-if="oferta.image" :src="oferta.image" :alt="oferta.name" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" @error="e => { e.target.onerror = null; e.target.src = '/assets/covers/cover-fallback.svg' }" />
+            <img v-if="oferta.image" :src="oferta.image" :alt="oferta.name" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" @error="e => { e.target.onerror = null; e.target.src = $resolveCover(null, { title: 'Libro', id: 0 }) }" />
             <div v-else class="cover-fallback-of" :style="{ background: colorOf(oferta.id) }">
               <i class="bi bi-book-fill text-white fs-2 opacity-75"></i>
             </div>
@@ -111,11 +111,11 @@
     </div>
 
     <!-- Modal detalle del libro -->
-    <div v-if="libroSeleccionado" class="modal-overlay-ys" @click.self="cerrarDetalle">
+    <div v-if="libroSeleccionado" class="modal fade show d-block" tabindex="-1" role="dialog" aria-modal="true" @click.self="cerrarDetalle">
       <div class="modal-ys">
         <button class="modal-x-btn" @click="cerrarDetalle"><i class="bi bi-x"></i></button>
         <div class="modal-cover">
-          <img v-if="libroSeleccionado.image" :src="libroSeleccionado.image" :alt="libroSeleccionado.name" @error="e => { e.target.onerror = null; e.target.src = '/assets/covers/cover-fallback.svg' }" />
+          <img v-if="libroSeleccionado.image" :src="libroSeleccionado.image" :alt="libroSeleccionado.name" @error="e => { e.target.onerror = null; e.target.src = $resolveCover(null, { title: 'Libro', id: 0 }) }" />
           <div v-else class="cover-fallback-modal">📚</div>
           <span v-if="libroSeleccionado.badge" class="book-badge-modal">{{ libroSeleccionado.badge }}</span>
         </div>
@@ -239,7 +239,6 @@ export default {
 .offer-add-btn { width: 100%; background: rgba(245,158,11,.12); border: 1px solid rgba(245,158,11,.25); color: var(--accent); padding: 7px; border-radius: var(--r-sm); font-size: 11px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all .2s; }
 .offer-add-btn:hover { background: var(--accent); color: #000; }
 .ys-toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--bg-elevated); border: 1px solid var(--border-color); color: var(--text-primary); padding: 10px 20px; border-radius: 30px; font-size: 13px; font-weight: 500; box-shadow: var(--shadow-md); z-index: 9999; white-space: nowrap; display: flex; align-items: center; }
-.modal-overlay-ys { position: fixed; inset: 0; background: rgba(0,0,0,.6); backdrop-filter: blur(3px); z-index: 500; display: flex; align-items: center; justify-content: center; padding: 16px; }
 .modal-ys { background: var(--bg-dark); border: 1px solid var(--border-color); border-radius: var(--r-lg); width: 100%; max-width: 440px; overflow: hidden; position: relative; }
 .modal-x-btn { position: absolute; top: 12px; right: 12px; width: 30px; height: 30px; border-radius: 50%; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-secondary); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; font-size: 16px; transition: all .2s; }
 .modal-x-btn:hover { border-color: var(--violet); color: var(--text-primary); }
